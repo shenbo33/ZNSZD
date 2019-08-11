@@ -1,33 +1,33 @@
-const PROGRESS_WIDTH=100;
+const PROGRESS_WIDTH = innerWidth;
+const PROGRESS_TOTAL = 10
 
 export default class Progress {
-  constructor( ctx, RSR ){
+  constructor(ctx ){
     console.log("初始化Progress...");
-    this.width = PROGRESS_WIDTH
-    this.height=50
-    this.y=200
-    this.x=400
-    this.color = "green"
+    this.width = 0
+    this.height = 5
+    
+    this.x = 0
+    this.y = innerHeight - this.height
+    this.color = "pink"
 
-    this.excute(ctx, RSR)
+    this.loading(ctx, 0)
   }
 
-  excute(ctx, RSR){
-    let loaded = 0
-    const RSRlen = Object.keys(RSR).length
-    for (let vkey in RSR){
-      let bgimage = new Image()
-      bgimage.src = RSR[vkey]
-      bgimage.onload = () => {
+  loading(ctx, loaded){
 
-        console.log("图片加载成功，URL::", RSR[vkey])
-        loaded++
-        clear(ctx)
-        update(loaded/RSRlen)
-        render(ctx)
+    loaded ++
+    setTimeout(() => {
 
+      console.log("图片加载成功，URL::", loaded)
+      this.update(loaded / PROGRESS_TOTAL)
+      this.clear(ctx)
+      this.render(ctx)
+
+      if (loaded < PROGRESS_TOTAL){
+        this.loading(ctx, loaded)
       }
-    }
+    }, 100)
   }
 
   update(scale = 0){
@@ -39,11 +39,11 @@ export default class Progress {
   render(ctx){
     console.log("渲染Progress百分比属性为", this.scale);
     ctx.fillStyle = this.color
-    ctx.fillRect( this.x, this.y, this.x + this.width, this.y + this.height );
+    ctx.fillRect( this.x, this.y, this.width, this.height );
   }
 
   clear(ctx) {
-    ctx.clearRect( this.x, this.y, this.x + this.width, this.y + this.height )
+    ctx.clearRect( this.x, this.y, this.width, this.height )
   }
 
 }

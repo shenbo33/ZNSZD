@@ -27,8 +27,8 @@ export default class Welcome {
   render(ctx) {
     this.bgimage = wx.createImage()
     this.bgimage.src = BG_IMG_SRC
-    this.bgimage.width = canvas.width
-    this.bgimage.height = canvas.height
+    this.bgimage.width = innerWidth
+    this.bgimage.height = innerHeight
     this.bgimage.onload = () => {
       console.log(this.bgimage.width, this.bgimage.height)
       ctx.drawImage(this.bgimage, 0, 0, this.bgimage.width, this.bgimage.height)

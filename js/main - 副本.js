@@ -1,7 +1,6 @@
 import Player     from './player/index'
 import Enemy      from './npc/enemy'
-// import BackGround from './runtime/background'
-import Welcome from './runtime/welcome'
+import BackGround from './runtime/background'
 import GameInfo   from './runtime/gameinfo'
 import Music      from './runtime/music'
 import DataBus    from './databus'
@@ -24,7 +23,7 @@ export default class Main {
 
     canvas.removeEventListener('touchstart',this.touchHandler)
 
-    this.bg = new Welcome(ctx)
+    this.bg = new BackGround(ctx)
     this.player   = new Player(ctx)
     this.gameinfo = new GameInfo()
     this.music    = new Music()

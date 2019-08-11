@@ -1,7 +1,7 @@
 const screenWidth  = window.innerWidth
 const screenHeight = window.innerHeight
 
-let atlas = new Image()
+let atlas = wx.createImage()
 atlas.src = 'images/Common.png'
 
 export default class GameInfo {
