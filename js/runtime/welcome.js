@@ -13,7 +13,14 @@ const BG_IMG_SRC = 'images/welcome.png'
 export default class Welcome {
 
   constructor(ctx) {
-    this.render(ctx)
+    let p = new Promise((resolve, reject) => {
+      this.render(ctx)
+      .then(() => {
+        console.log("背景渲染成功..")
+        resolve()
+      })
+    })
+    return p
   }
 
   update(){
@@ -25,14 +32,18 @@ export default class Welcome {
    * 
    */
   render(ctx) {
-    this.bgimage = wx.createImage()
-    this.bgimage.src = BG_IMG_SRC
-    this.bgimage.width = innerWidth
-    this.bgimage.height = innerHeight
-    this.bgimage.onload = () => {
-      console.log(this.bgimage.width, this.bgimage.height)
-      ctx.drawImage(this.bgimage, 0, 0, this.bgimage.width, this.bgimage.height)
-    }
+    let p = new Promise((resolve, reject) => {
+      this.bgimage = wx.createImage()
+      this.bgimage.src = BG_IMG_SRC
+      this.bgimage.width = innerWidth
+      this.bgimage.height = innerHeight
+      this.bgimage.onload = () => {
+        console.log(this.bgimage.width, this.bgimage.height)
+        ctx.drawImage(this.bgimage, 0, 0, this.bgimage.width, this.bgimage.height)
+        resolve()
+      }
+    })
+    return p
   }
 
   
